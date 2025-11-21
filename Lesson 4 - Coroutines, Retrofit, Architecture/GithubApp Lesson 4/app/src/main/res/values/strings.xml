@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GithubApp</string>
+    <string name="go_to_profile">Go to Profile</string>
+    <string name="search_user_prompt">Username</string>
+    <string name="home_screen_title">Search for user</string>
+    <string name="profile_repositories_list_title">Repositories:</string>
+    <string name="profile_error_loading">Error loading user or no user found</string>
+</resources>
