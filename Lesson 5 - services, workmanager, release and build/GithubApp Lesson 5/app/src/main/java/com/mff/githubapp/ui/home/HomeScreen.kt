@@ -1,0 +1,85 @@
+package com.mff.githubapp.ui.home
+
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.mff.githubapp.R
+import com.mff.githubapp.ui.profile.ProfileScreen
+import com.mff.githubapp.ui.theme.GithubAppTheme
+
+@Composable
+fun HomeScreen(
+    navigateToProfile: (String) -> Unit
+) {
+    var searchedUser by rememberSaveable { mutableStateOf("") }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.home_screen_title),
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+
+            Spacer(modifier = Modifier.padding(4.dp))
+
+
+            OutlinedTextField(
+                value = searchedUser,
+                onValueChange = { searchedUser = it },
+                label = { Text(stringResource(R.string.search_user_prompt)) },
+            )
+
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            Button(
+                onClick = {
+                    navigateToProfile(searchedUser)
+                },
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = stringResource(R.string.go_to_profile))
+            }
+        }
+    }
+}
+
+@Preview(
+    showBackground = true,
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Preview(
+    showBackground = true,
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+private fun HomeScreenPreview() {
+    GithubAppTheme {
+        HomeScreen(
+            navigateToProfile = {}
+        )
+    }
+}
